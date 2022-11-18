@@ -94,3 +94,4 @@ C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\V
 C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\Views\Administration\CreateRole.cshtml.g.cs
 C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\Views\Administration\ListRoles.cshtml.g.cs
+C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\Views\Administration\EditRole.cshtml.g.cs
