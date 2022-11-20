@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement1.Models;
 using EmployeeManagement1.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -103,6 +104,13 @@ namespace EmployeeManagement1.Controllers
                     ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
                 }
             return View(model);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+
+        {
+            return View();
         }
 
 

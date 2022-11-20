@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement1.Models;
 using EmployeeManagement1.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement1.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -19,6 +21,8 @@ namespace EmployeeManagement1.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
+     
+
         [HttpGet]
         public IActionResult CreateRole()
         {

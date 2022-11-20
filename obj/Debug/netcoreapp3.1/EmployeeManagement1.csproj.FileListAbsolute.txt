@@ -96,3 +96,4 @@ C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\V
 C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\Views\Administration\ListRoles.cshtml.g.cs
 C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\Views\Administration\EditRole.cshtml.g.cs
 C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\Views\Administration\EditUserInRole.cshtml.g.cs
+C:\Users\Jose J\source\repos\EmployeeManagement1\obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs
