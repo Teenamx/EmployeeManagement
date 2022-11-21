@@ -124,6 +124,63 @@ namespace EmployeeManagement1.Controllers
            
         }
         [HttpGet]
+
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if(user==null)
+            {
+                ViewBag.ErrorMessage = $"User with id={id} cannot be found";
+                return View("NotFound");
+            }
+            var userRoles = await userManager.GetRolesAsync(user);
+            var userClaims = await userManager.GetClaimsAsync(user);
+
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                City = user.City,
+                UserName = user.UserName,
+                Claims = userClaims.Select(c => c.Value).ToList(),
+                Roles = userRoles
+
+            };
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel modelEditUser)
+        {
+            var user = await userManager.FindByIdAsync(modelEditUser.Id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with id={modelEditUser.Id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                user.Email = modelEditUser.Email;
+                user.UserName = modelEditUser.UserName;
+                user.City = modelEditUser.City;
+                var result = await userManager.UpdateAsync(user);
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(modelEditUser);
+
+            }
+           
+        }
+
+        [HttpGet]
         public async Task<IActionResult> EditUserInRole(string roleId)
         {
             ViewBag.roleId = roleId;

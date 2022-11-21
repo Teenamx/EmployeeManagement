@@ -19,8 +19,8 @@
         <h5 class="card-title">@user.UserName</h5>
     </div>
     <div class="card-footer">
-        <a class="btn btn-primary">Edit</a>
-        <a class="btn btn-danger">Delete</a>
+        <a class="btn btn-primary" asp-action="EditUser" asp-controller="Administration" asp-route-id="@user.Id">Edit</a>
+        <a class="btn btn-danger" asp-action="DeleteUser" asp-controller="Administration" asp-route-id="@user.Id">Delete</a>
     </div>
 </div>
                 }
