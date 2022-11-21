@@ -28,7 +28,12 @@ namespace EmployeeManagement1.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+           var users= userManager.Users;
+            return View(users);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRoleVIewModel createRoleVIewModel)
         {

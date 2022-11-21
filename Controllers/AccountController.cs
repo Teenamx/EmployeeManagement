@@ -59,6 +59,10 @@ namespace EmployeeManagement1.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);
                 if(result.Succeeded)
                 {
+                    if(signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Administration");
+                    }
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home");
                 }
