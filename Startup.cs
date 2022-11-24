@@ -34,6 +34,9 @@ namespace EmployeeManagement1
                 options.Password.RequiredLength = 10;
 
             });
+            services.AddAuthorization(options => {
+                options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role")); 
+            });
             services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
         }
 
