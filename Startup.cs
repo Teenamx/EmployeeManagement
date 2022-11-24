@@ -35,7 +35,8 @@ namespace EmployeeManagement1
 
             });
             services.AddAuthorization(options => {
-                options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role")); 
+                options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role"));
+                options.AddPolicy("EditRolePolicy", policy => policy.RequireClaim("Edit Role"));
             });
             services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
         }
