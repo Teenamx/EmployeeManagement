@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement1.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin,Super Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
