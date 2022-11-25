@@ -29,6 +29,7 @@ namespace EmployeeManagement1.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserClaims(string userId)
         {
             var user = await userManager.FindByIdAsync(userId);
@@ -49,7 +50,7 @@ namespace EmployeeManagement1.Controllers
                 {
                     ClaimsType = claim.Type
                 };
-                if(existingUserClaims.Any(c=>c.Type==claim.Type))
+                if(existingUserClaims.Any(c=>c.Type==claim.Type && c.Value=="true"))
                  {
                     userClaim.IsSelected = true;
                 }
@@ -61,6 +62,7 @@ namespace EmployeeManagement1.Controllers
 
         }
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserClaims(UserClaimsViewModel model)
         {
             var user = await userManager.FindByIdAsync(model.UserId);
@@ -80,7 +82,7 @@ namespace EmployeeManagement1.Controllers
                     ModelState.AddModelError("", "Cannot remove user existing claims");
                     return View(model);
                 }
-               result= await userManager.AddClaimsAsync(user, model.Claims.Where(c => c.IsSelected).Select(c => new Claim ( c.ClaimsType, c.ClaimsType )));
+               result= await userManager.AddClaimsAsync(user, model.Claims.Select(c => new Claim ( c.ClaimsType, c.IsSelected?"true":"false" )));
             if(!result.Succeeded)
             {
                 ModelState.AddModelError("", "Cannot add selected claims to user");
@@ -153,6 +155,7 @@ namespace EmployeeManagement1.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
             ViewBag.userId = userId;
@@ -190,6 +193,7 @@ namespace EmployeeManagement1.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model,string userId)
         {
             var user = await userManager.FindByIdAsync(userId);
@@ -260,7 +264,7 @@ namespace EmployeeManagement1.Controllers
             return View(roles);
         }
         [HttpGet]
-        [Authorize(Policy ="EditRolePolicy")]
+      //  [Authorize(Policy ="EditRolePolicy")]
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
@@ -289,7 +293,7 @@ namespace EmployeeManagement1.Controllers
 
         }
         [HttpPost]
-        [Authorize(Policy = "EditRolePolicy")]
+     //   [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(EditRoleViewModel editRoleViewModel)
         {
             var role = await roleManager.FindByIdAsync(editRoleViewModel.Id);
@@ -335,7 +339,7 @@ namespace EmployeeManagement1.Controllers
                 Email = user.Email,
                 City = user.City,
                 UserName = user.UserName,
-                Claims = userClaims.Select(c => c.Value).ToList(),
+                Claims = userClaims.Select(c =>c.Type+" : "+c.Value).ToList(),
                 Roles = userRoles
 
             };
