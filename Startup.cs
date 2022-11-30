@@ -44,6 +44,11 @@ namespace EmployeeManagement1
             services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
             services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRolesandClaimsHandler>();
             services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                   
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
